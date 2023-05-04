@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Items{% endblock %}
+
+{% block content %}
+<style>
+    .item-img {
+        width: 400px;
+        height: 300px;
+        object-fit: cover;
+    }
+</style>
+    <div class="pb-6 grid grid-cols-4 bg-purple-400 ">
+        <div class="col-span-1">
+            <form method="get" action="{% url 'item:items' %}">
+                <input name="query" class="w-full   py-4 px-6  bg-white border" type="text" value="{{ query }}" placeholder=" search">
+                 
+                <button class="mt-2 py-4 px-8 text-lg bg-yellow-400 text-white rounded-xl">Search</button>
+            </form>
+
+            <hr class=" border-purple-500 my-6">
+
+            <p class="font-semibold text-white">Categories</p>
+
+            <ul>
+                {% for category in categories %}
+                    <li class="py-2 px-2 text-white rounded-xl{% if category.id == category_id %} bg-{% endif %}">
+                        <a href="{% url 'item:items' %}?query={{ query }}&category={{ category.id }}">{{ category.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <hr class=" border-purple-500 my-6" >
+
+            <p class="font-semibold text-white">Clear filters</p>
+
+            <ul>
+                <li><a href="{% url 'item:items' %}" class="mt-2 py-4 px-8 inline-block bg-yellow-400 text-lg rounded-xl text-white">Clear</a>
+        </div>
+
+        <div class="col-span-3">
+            <div class="grid grid-cols-4 gap-3">
+                {% for item in items %}
+                <div>
+                    <a href="{% url 'item:detail' item.id %}">
+                        <div>
+                            <img src="{{ item.image.url }}" class=" item-img">
+                        </div>
+
+                        <div class="p-4 bg-purple-500 ">
+                            <h2 class="text-2xl text-purple-100 ">{{ item.name }}</h2>
+                            <p class="text-purple-200">condition: {{ item.condition }}</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

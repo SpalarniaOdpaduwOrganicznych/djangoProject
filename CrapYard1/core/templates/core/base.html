@@ -1,0 +1,70 @@
+<!doctype html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-wifth, initial-scale=1.0">
+
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <title>{% block title %} {% endblock %} |  CrapYard</title>
+    </head>
+
+    <body>
+        <nav class="py-6 px-6 flex justify-between items-center border-b-4  border-purple-500">
+            <a href="/" class="text-4xl font-bold">CrapYard</a>
+
+            <div class="space-x-6">
+                <a href="{% url 'item:new' %}" class="px-6 py-3 text-lg font-bold bg-green-500 text-white rounded-xl hover:bg-green-700">New item +</a>
+                <a href="{% url 'item:items' %}" class="px-6 py-3 text-lg font-bold bg-yellow-400 text-white rounded-xl hover:bg-yellow-700">Search</a>
+
+                {% if request.user.is_authenticated %}
+
+                <a href="{% url 'conversation:inbox' %}" class="px-6 py-3 text-lg font-bold bg-sky-400 text-white rounded-xl hover:bg-sky-700">Inbox</a>
+                <a href="{% url 'dashboard:index' %}" class="px-6 py-3 text-lg font-bold bg-purple-500 text-white rounded-xl hover:bg-purple-700">Dashboard</a>
+                <a href="{% url 'core:logout' %}" class="px-6 py-3 text-lg font-bold bg-red-500 text-white rounded-xl hover:bg-red-700">Log out</a>
+
+                
+                {% else %}
+
+                <a href="{% url 'core:signup' %}" class="px-6 py-3 text-lg font-bold bg-blue-500 text-white rounded-xl hover:bg-blue-700">Sing up</a>
+                <a href="{% url 'core:login' %}" class="px-6 py-3 text-lg font-bold bg-purple-500 text-white rounded-xl hover:bg-purple-700">Log in</a>
+                {% endif %}
+            </div>
+        </nav>
+
+        <div class="px-6 py-6">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <footer class="py-6 px-6 flex justify-between bg-purple-800">
+            <div class="w-2/3 pr-10">
+                <h3 class="mb-5 font-bold text-purple-300">About</h3>
+
+                <p class="text-lg text-purple-400">Welcome to our online platform, where we are redefining the concept of consumption. We understand that in today's society, consumption has become an integral part of our lives. However, we also understand that the constant need to have new things and the wastefulness that comes with it is not sustainable for our planet.
+
+                    Our platform offers a unique solution to this problem by providing a platform for users to exchange their unused and unneeded items with other users. This means that instead of throwing away these items or letting them collect dust in your home, you can give them a new life by exchanging them with someone who will truly appreciate them.
+                    
+                    Our mission is to reduce waste, promote sustainability, and encourage responsible consumption. We believe that by promoting the reuse of existing items, we can significantly reduce the environmental impact of the production and disposal of new products.
+                    
+                    Moreover, our platform fosters a sense of community and encourages social interaction among our users. By exchanging items, users can connect with other like-minded individuals and share their interests and experiences.
+                    
+                    Join us in our mission to make the world a more sustainable place, one exchange at a time. Together, we can make a difference and create a better future for ourselves and for generations to come.
+                </p>
+            </div>
+
+            <div class="w-1/3">
+                <h3 class="mb-5 font-bold text-purple-400">Menu</h3>
+
+                <ul class="space-y-2">
+                    <li><a href="{% url 'core:rules' %}" class="text-lg text-purple-500 hover:text-lime-400">Rules</a></li>
+                    <li><a href="{% url 'core:contact' %}" class="text-lg text-purple-500 hover:text-lime-400">Contact</a></li>
+                    <li><a href="{% url 'core:privacy_policy' %}" class="text-lg text-purple-500 hover:text-lime-400">Privacy policy</a></li>
+                    <li><a href="{% url 'core:terms_of_service' %}" class="text-lg text-purple-500 hover:text-lime-400">Term of use</a></li>
+                    <li><a href="{% url 'core:terms_of_service' %}" class="text-lg text-purple-500 hover:text-lime-400">Rules</a></li>
+                </ul>
+            </div>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,51 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <style>
+        .item-img {
+            width: 400px;
+            height: 300px;
+            object-fit: cover;
+        }
+    </style>
+    
+    <div class="mt-6 px-6 py-12 bg-purple-400 rounded-xl">
+        <h2 class="mb-12 text-4xl font-bold text-white text-center">Newest items</h2>
+
+        <div class="grid grid-cols-4 gap-3">
+            {% for item in items %}
+                <div>
+                    <a href="{% url 'item:detail' item.id %}">
+                        <div>
+                            <img src="{{ item.image.url }}" class=" item-img">
+                        </div>
+
+                        <div class="p-4 bg-purple-500 ">
+                            <h2 class="text-2xl text-purple-100 ">{{ item.name }}</h2>
+                            <p class="text-purple-200">condition: {{ item.condition }}</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="mt-6 px-6 py-12 bg-purple-400 rounded-xl">
+        <h2 class="mb-12 text-4xl font-bold text-purple-50 text-center">Categories</h2>
+
+        <div class="grid grid-cols-3 gap-3">
+            {% for category in categories %}
+                <div>
+                    <a href="#">
+                        <div class="p-6 bg-purple-500 rounded-b-xl">
+                            <a href="{% url 'item:items' %}?query={{ query }}&category={{ category.id }}">{{ category.name }}</a>
+                            <p class="text-purple-300">{{ category.items.count }} items</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
