@@ -5,4 +5,4 @@ Built using cutting-edge technologies, the app features a sleek and intuitive in
 
 Whether you are looking to declutter your home, find a new treasure, or simply connect with like-minded individuals, this full stack app has something for everyone. So why not join the growing community of users who are embracing a more sustainable and socially responsible way of living, and start trading today!
 
-To try it on your own, clone the repo, then in terminal enter the command "python manage.py runserver" 
+To try it on your own, clone the repo, then in terminal enter the command "cd CrapYard1" then "python manage.py runserver" 
